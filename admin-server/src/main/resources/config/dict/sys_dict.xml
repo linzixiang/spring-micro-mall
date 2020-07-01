@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dict>
+
+    <!-- 性别 -->
+    <option keyName="normal_gender" code="gender" excludeStop="true" excludeDelete="true"  orderBy="order_num desc" whereExt=""/>
+    <!-- 显示/隐藏 -->
+    <option keyName="show_hide_all" code="show_hide" excludeDelete="false" excludeStop="false" orderBy="order_num desc"/>
+    <!-- 正常/停用 -->
+    <option keyName="enable_normal_disable" code="normal_disable" excludeStop="false" excludeDelete="false" orderBy="order_num desc"/>
+    <!-- 是否 -->
+    <option keyName="yes_no" code="yes_no" excludeStop="false" excludeDelete="false" orderBy="order_num desc"/>
+</dict>

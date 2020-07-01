@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.linzx.admin.system.mapper.DictMapper">
+
+    <select id="selectList" parameterType="com.linzx.admin.system.domain.Dict"
+            resultType="com.linzx.admin.system.domain.Dict">
+        <include refid="selectVo"/>
+        <include refid="selectList_where"/>
+    </select>
+
+    <select id="getById" parameterType="java.lang.Long" resultType="com.linzx.admin.system.domain.Dict">
+        <include refid="selectVo"/>
+        where dict_id = #{dictId}
+    </select>
+
+    <select id="selectByIds" parameterType="java.lang.Long" resultType="com.linzx.admin.system.domain.Dict">
+        <include refid="selectVo"/>
+        where dict_id in
+        <foreach item="dictId" collection="array" open="(" separator="," close=")">
+            #{dictId}
+        </foreach>
+    </select>
+
+    <insert id="insert" parameterType="com.linzx.admin.system.domain.Dict">
+        insert into sys_dict
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="dictId != null">dict_id,</if>
+            <if test="dictName != null">dict_name,</if>
+            <if test="dictCode != null">dict_code,</if>
+            <if test="status != null">status,</if>
+            <if test="reversion != null">reversion,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="dictId != null">#{dictId},</if>
+            <if test="dictName != null">#{dictName},</if>
+            <if test="dictCode != null">#{dictCode},</if>
+            <if test="status != null">#{status},</if>
+            <if test="reversion != null">#{reversion},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.linzx.admin.system.domain.Dict">
+        update sys_dict
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="dictId != null">dict_id = #{dictId},</if>
+            <if test="dictName != null">dict_name = #{dictName},</if>
+            <if test="dictCode != null">dict_code = #{dictCode},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="reversion != null">reversion = #{reversion},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where dict_id = #{dictId}
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from sys_dict where dict_id = #{dictId}
+    </delete>
+
+    <delete id="deleteByIds" parameterType="java.lang.Long">
+        delete from sys_dict where dict_id in
+        <foreach item="dictId" collection="array" open="(" separator="," close=")">
+            #{dictId}
+        </foreach>
+    </delete>
+
+    <sql id="selectVo">
+        select dict_id as dictId,dict_name as dictName,dict_code as dictCode,status as status,reversion as reversion,create_by as createBy,create_time as createTime,update_by as updateBy,update_time as updateTime,remark as remark from sys_dict
+    </sql>
+
+    <sql id="selectList_where">
+        <where>
+            <if test="dictId != null"> and dict_id = #{dictId}</if>
+            <if test="dictName != null"> and dict_name = #{dictName}</if>
+            <if test="dictCode != null"> and dict_code = #{dictCode}</if>
+            <if test="status != null"> and status = #{status}</if>
+            <if test="reversion != null"> and reversion = #{reversion}</if>
+            <if test="createBy != null"> and create_by = #{createBy}</if>
+            <if test="updateBy != null"> and update_by = #{updateBy}</if>
+            <if test="createTimeGte != null and createTimeGte != ''"> and create_time &gt;= #{createTimeGte}</if>
+            <if test="createTimeLte != null and createTimeLte != ''"> and create_time &lt;= #{createTimeLte}</if>
+            <if test="updateTimeGte != null and updateTimeGte != ''"> and update_time &gt;= #{updateTimeGte}</if>
+            <if test="updateTimeLte != null and updateTimeLte != ''"> and update_time &lt;= #{updateTimeLte}</if>
+            <if test="remarkLike != null and remarkLike != ''"> and remark like '%${remarkLike}%'</if>
+            <if test="params.dictCodes != null">
+                <foreach item="dictCode" collection="params.dictCodes" open=" and dict_code in (" separator="," close=")">
+                    #{dictCode}
+                </foreach>
+            </if>
+        </where>
+    </sql>
+</mapper>

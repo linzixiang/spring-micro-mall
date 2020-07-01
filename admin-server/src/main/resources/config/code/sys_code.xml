@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<codes>
+    <!--
+        keyName：唯一编码
+    -->
+    <code keyName="menu_normal" tableName="sys_menu" nameField="menu_name" valueField="menu_id" whereExt="status = 1" orderBy="order_num desc" />
+
+    <!-- 字典表 -->
+    <code keyName="dict_normal" tableName="sys_dict" nameField="dict_code" valueField="dict_id" whereExt="status = 1" orderBy="dict_code asc"/>
+</codes>

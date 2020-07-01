@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.linzx.admin.system.mapper.RoleMenuMapper">
+
+    <select id="selectList" parameterType="com.linzx.admin.system.domain.RoleMenu"
+            resultType="com.linzx.admin.system.domain.RoleMenu">
+        <include refid="selectVo"/>
+        <include refid="selectList_where"/>
+		<if test="params.orderBy != null and params.orderBy != ''">
+            ORDER BY ${params.orderBy}
+        </if>
+    </select>
+
+    <select id="getById" parameterType="java.lang.Long" resultType="com.linzx.admin.system.domain.RoleMenu">
+        <include refid="selectVo"/>
+        where role_menu_id = #{roleMenuId}
+    </select>
+
+    <select id="selectByIds" parameterType="java.lang.Long" resultType="com.linzx.admin.system.domain.RoleMenu">
+        <include refid="selectVo"/>
+        where role_menu_id in
+        <foreach item="roleMenuId" collection="array" open="(" separator="," close=")">
+            #{roleMenuId}
+        </foreach>
+    </select>
+
+    <insert id="insert" parameterType="com.linzx.admin.system.domain.RoleMenu">
+        insert into sys_role_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleMenuId != null">role_menu_id,</if>
+            <if test="roleId != null">role_id,</if>
+            <if test="menuId != null">menu_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="roleMenuId != null">#{roleMenuId},</if>
+            <if test="roleId != null">#{roleId},</if>
+            <if test="menuId != null">#{menuId},</if>
+        </trim>
+    </insert>
+
+    <insert id="insertBatch" parameterType="com.linzx.admin.system.domain.RoleMenu">
+        insert into sys_role_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="list[0].roleMenuId != null">role_menu_id,</if>
+            <if test="list[0].roleId != null">role_id,</if>
+            <if test="list[0].menuId != null">menu_id,</if>
+        </trim>
+        <foreach item="roleMenu" collection="list" open="values" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="list[0].roleMenuId != null">#{roleMenu.roleMenuId},</if>
+            <if test="list[0].roleId != null">#{roleMenu.roleId},</if>
+            <if test="list[0].menuId != null">#{roleMenu.menuId},</if>
+            </trim>
+        </foreach>
+    </insert>
+
+    <update id="update" parameterType="com.linzx.admin.system.domain.RoleMenu">
+        update sys_role_menu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="roleMenuId != null">role_menu_id = #{roleMenuId},</if>
+            <if test="roleId != null">role_id = #{roleId},</if>
+            <if test="menuId != null">menu_id = #{menuId},</if>
+        </trim>
+        where role_menu_id = #{roleMenuId}
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from sys_role_menu where role_menu_id = #{roleMenuId}
+    </delete>
+
+    <delete id="deleteByIds" parameterType="java.lang.Long">
+        delete from sys_role_menu where role_menu_id in
+        <foreach item="roleMenuId" collection="array" open="(" separator="," close=")">
+            #{roleMenuId}
+        </foreach>
+    </delete>
+
+    <sql id="selectVo">
+        select role_menu_id as roleMenuId,role_id as roleId,menu_id as menuId from sys_role_menu
+    </sql>
+
+    <sql id="selectList_where">
+        <where>
+            <if test="roleMenuId != null"> and role_menu_id = #{roleMenuId}</if>
+            <if test="roleId != null"> and role_id = #{roleId}</if>
+            <if test="menuId != null"> and menu_id = #{menuId}</if>
+            <if test="createTimeGte != null and createTimeGte != ''"> and create_time &gt;= #{createTimeGte}</if>
+            <if test="createTimeLte != null and createTimeLte != ''"> and create_time &lt;= #{createTimeLte}</if>
+            <if test="updateTimeGte != null and updateTimeGte != ''"> and update_time &gt;= #{updateTimeGte}</if>
+            <if test="updateTimeLte != null and updateTimeLte != ''"> and update_time &lt;= #{updateTimeLte}</if>
+            <if test="remarkLike != null and remarkLike != ''"> and remark like '%${remarkLike}%'</if>
+        </where>
+    </sql>
+</mapper>

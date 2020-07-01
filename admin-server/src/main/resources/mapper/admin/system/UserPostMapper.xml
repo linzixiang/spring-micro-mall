@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.linzx.admin.system.mapper.UserPostMapper">
+
+    <select id="selectList" parameterType="com.linzx.admin.system.domain.UserPost"
+            resultType="com.linzx.admin.system.domain.UserPost">
+        <include refid="selectVo"/>
+        <include refid="selectList_where"/>
+		<if test="params.orderBy != null and params.orderBy != ''">
+            ORDER BY ${params.orderBy}
+        </if>
+    </select>
+
+    <select id="getById" parameterType="java.lang.Long" resultType="com.linzx.admin.system.domain.UserPost">
+        <include refid="selectVo"/>
+        where user_post_id = #{userPostId}
+    </select>
+
+    <select id="selectByIds" parameterType="java.lang.Long" resultType="com.linzx.admin.system.domain.UserPost">
+        <include refid="selectVo"/>
+        where user_post_id in
+        <foreach item="userPostId" collection="array" open="(" separator="," close=")">
+            #{userPostId}
+        </foreach>
+    </select>
+
+    <insert id="insert" parameterType="com.linzx.admin.system.domain.UserPost">
+        insert into sys_user_post
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userPostId != null">user_post_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="postId != null">post_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userPostId != null">#{userPostId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="postId != null">#{postId},</if>
+        </trim>
+    </insert>
+	
+	<insert id="insertBatch" parameterType="com.linzx.admin.system.domain.UserPost">
+        insert into sys_user_post
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="list[0].userPostId != null">user_post_id,</if>
+            <if test="list[0].userId != null">user_id,</if>
+            <if test="list[0].postId != null">post_id,</if>
+        </trim>
+		<foreach item="userPost" collection="list" open="values" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="list[0].userPostId != null">#{userPost.userPostId},</if>
+            <if test="list[0].userId != null">#{userPost.userId},</if>
+            <if test="list[0].postId != null">#{userPost.postId},</if>
+            </trim>
+        </foreach>
+    </insert>
+
+    <update id="update" parameterType="com.linzx.admin.system.domain.UserPost">
+        update sys_user_post
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userPostId != null">user_post_id = #{userPostId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="postId != null">post_id = #{postId},</if>
+        </trim>
+        where user_post_id = #{userPostId}
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from sys_user_post where user_post_id = #{userPostId}
+    </delete>
+
+    <delete id="deleteByIds" parameterType="java.lang.Long">
+        delete from sys_user_post where user_post_id in
+        <foreach item="userPostId" collection="array" open="(" separator="," close=")">
+            #{userPostId}
+        </foreach>
+    </delete>
+
+    <sql id="selectVo">
+        select user_post_id as userPostId,user_id as userId,post_id as postId from sys_user_post
+    </sql>
+
+    <sql id="selectList_where">
+        <where>
+            <if test="userPostId != null"> and user_post_id = #{userPostId}</if>
+            <if test="userId != null"> and user_id = #{userId}</if>
+            <if test="postId != null"> and post_id = #{postId}</if>
+            <if test="createTimeGte != null and createTimeGte != ''"> and create_time &gt;= #{createTimeGte}</if>
+            <if test="createTimeLte != null and createTimeLte != ''"> and create_time &lt;= #{createTimeLte}</if>
+            <if test="updateTimeGte != null and updateTimeGte != ''"> and update_time &gt;= #{updateTimeGte}</if>
+            <if test="updateTimeLte != null and updateTimeLte != ''"> and update_time &lt;= #{updateTimeLte}</if>
+            <if test="remarkLike != null and remarkLike != ''"> and remark like '%${remarkLike}%'</if>
+        </where>
+    </sql>
+</mapper>

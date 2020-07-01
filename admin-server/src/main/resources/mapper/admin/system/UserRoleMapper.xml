@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.linzx.admin.system.mapper.UserRoleMapper">
+
+    <select id="selectList" parameterType="com.linzx.admin.system.domain.UserRole"
+            resultType="com.linzx.admin.system.domain.UserRole">
+        <include refid="selectVo"/>
+        <include refid="selectList_where"/>
+		<if test="params.orderBy != null and params.orderBy != ''">
+            ORDER BY ${params.orderBy}
+        </if>
+    </select>
+
+    <select id="getById" parameterType="java.lang.Long" resultType="com.linzx.admin.system.domain.UserRole">
+        <include refid="selectVo"/>
+        where use_role_id = #{useRoleId}
+    </select>
+
+    <select id="selectByIds" parameterType="java.lang.Long" resultType="com.linzx.admin.system.domain.UserRole">
+        <include refid="selectVo"/>
+        where use_role_id in
+        <foreach item="useRoleId" collection="array" open="(" separator="," close=")">
+            #{useRoleId}
+        </foreach>
+    </select>
+
+    <insert id="insert" parameterType="com.linzx.admin.system.domain.UserRole">
+        insert into sys_user_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="useRoleId != null">use_role_id,</if>
+            <if test="userId != null">user_id,</if>
+            <if test="roleId != null">role_id,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="useRoleId != null">#{useRoleId},</if>
+            <if test="userId != null">#{userId},</if>
+            <if test="roleId != null">#{roleId},</if>
+        </trim>
+    </insert>
+
+    <insert id="insertBatch" parameterType="com.linzx.admin.system.domain.UserRole">
+        insert into sys_user_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="list[0].useRoleId != null">use_role_id,</if>
+            <if test="list[0].userId != null">user_id,</if>
+            <if test="list[0].roleId != null">role_id,</if>
+        </trim>
+        <foreach item="userRole" collection="list" open="values" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="list[0].useRoleId != null">#{userRole.useRoleId},</if>
+                <if test="list[0].userId != null">#{userRole.userId},</if>
+                <if test="list[0].roleId != null">#{userRole.roleId},</if>
+            </trim>
+        </foreach>
+    </insert>
+
+    <update id="update" parameterType="com.linzx.admin.system.domain.UserRole">
+        update sys_user_role
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="useRoleId != null">use_role_id = #{useRoleId},</if>
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="roleId != null">role_id = #{roleId},</if>
+        </trim>
+        where use_role_id = #{useRoleId}
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from sys_user_role where use_role_id = #{useRoleId}
+    </delete>
+
+    <delete id="deleteByIds" parameterType="java.lang.Long">
+        delete from sys_user_role where use_role_id in
+        <foreach item="useRoleId" collection="array" open="(" separator="," close=")">
+            #{useRoleId}
+        </foreach>
+    </delete>
+
+    <sql id="selectVo">
+        select use_role_id as useRoleId,user_id as userId,role_id as roleId from sys_user_role
+    </sql>
+
+    <sql id="selectList_where">
+        <where>
+            <if test="useRoleId != null"> and use_role_id = #{useRoleId}</if>
+            <if test="userId != null"> and user_id = #{userId}</if>
+            <if test="roleId != null"> and role_id = #{roleId}</if>
+            <if test="createTimeGte != null and createTimeGte != ''"> and create_time &gt;= #{createTimeGte}</if>
+            <if test="createTimeLte != null and createTimeLte != ''"> and create_time &lt;= #{createTimeLte}</if>
+            <if test="updateTimeGte != null and updateTimeGte != ''"> and update_time &gt;= #{updateTimeGte}</if>
+            <if test="updateTimeLte != null and updateTimeLte != ''"> and update_time &lt;= #{updateTimeLte}</if>
+            <if test="remarkLike != null and remarkLike != ''"> and remark like '%${remarkLike}%'</if>
+        </where>
+    </sql>
+</mapper>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<apiGateway>
+    <module desc="单点登录">
+        <api id="sso.dict.list" urlMap="/sso/dict/list" desc="字典列表"/>
+    </module>
+</apiGateway>

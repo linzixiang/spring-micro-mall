@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.linzx.admin.system.mapper.UserMapper">
+
+    <select id="selectList" parameterType="com.linzx.admin.system.domain.User"
+            resultType="com.linzx.admin.system.domain.User">
+        <include refid="selectListVo"/>
+        <include refid="selectList_where"/>
+    </select>
+
+    <select id="getById" parameterType="java.lang.Long" resultType="com.linzx.admin.system.domain.User">
+        <include refid="selectVo"/>
+        where user_id = #{userId}
+    </select>
+
+    <select id="selectByIds" parameterType="java.lang.Long" resultType="com.linzx.admin.system.domain.User">
+        <include refid="selectVo"/>
+        where user_id in
+        <foreach item="userId" collection="array" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </select>
+
+    <insert id="insert" parameterType="com.linzx.admin.system.domain.User">
+        insert into sys_user
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="userId != null">user_id,</if>
+            <if test="account != null">account,</if>
+            <if test="deptId != null">dept_id,</if>
+            <if test="nickName != null">nick_name,</if>
+            <if test="userType != null">user_type,</if>
+            <if test="password != null">password,</if>
+            <if test="salt != null">salt,</if>
+            <if test="email != null">email,</if>
+            <if test="avatar != null">avatar,</if>
+            <if test="phoneNumber != null">phone_number,</if>
+            <if test="sex != null">sex,</if>
+            <if test="status != null">status,</if>
+            <if test="reversion != null">reversion,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="userId != null">#{userId},</if>
+            <if test="account != null">#{account},</if>
+            <if test="deptId != null">#{deptId},</if>
+            <if test="nickName != null">#{nickName},</if>
+            <if test="userType != null">#{userType},</if>
+            <if test="password != null">#{password},</if>
+            <if test="salt != null">#{salt},</if>
+            <if test="email != null">#{email},</if>
+            <if test="avatar != null">#{avatar},</if>
+            <if test="phoneNumber != null">#{phoneNumber},</if>
+            <if test="sex != null">#{sex},</if>
+            <if test="status != null">#{status},</if>
+            <if test="reversion != null">#{reversion},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.linzx.admin.system.domain.User">
+        update sys_user
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="userId != null">user_id = #{userId},</if>
+            <if test="account != null">account = #{account},</if>
+            <if test="deptId != null">dept_id = #{deptId},</if>
+            <if test="nickName != null">nick_name = #{nickName},</if>
+            <if test="userType != null">user_type = #{userType},</if>
+            <if test="password != null">password = #{password},</if>
+            <if test="salt != null">salt = #{salt},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="avatar != null">avatar = #{avatar},</if>
+            <if test="phoneNumber != null">phone_number = #{phoneNumber},</if>
+            <if test="sex != null">sex = #{sex},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="reversion != null">reversion = #{reversion},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where user_id = #{userId}
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from sys_user where user_id = #{userId}
+    </delete>
+
+    <delete id="deleteByIds" parameterType="java.lang.Long">
+        delete from sys_user where user_id in
+        <foreach item="userId" collection="array" open="(" separator="," close=")">
+            #{userId}
+        </foreach>
+    </delete>
+
+    <sql id="selectVo">
+        SELECT
+            user_id as userId,account as account,dept_id as deptId,nick_name as nickName,user_type as userType,`password` as `password`,salt as salt,email as email,avatar as avatar,phone_number as phoneNumber,sex as sex,`status` as `status`,reversion as reversion,create_by as createBy,create_time as createTime,update_by as updateBy,update_time as updateTime,remark as remark
+        FROM sys_user
+    </sql>
+
+    <sql id="selectListVo">
+        SELECT
+            user_id as userId,account as account,`user`.dept_id as deptId,nick_name as nickName,user_type as userType,`password` as `password`,salt as salt,`user`.email as email,avatar as avatar,phone_number as phoneNumber,sex as sex,`user`.`status` as `status`,`user`.reversion as reversion,`user`.create_by as createBy,`user`.create_time as createTime,`user`.update_by as updateBy,`user`.update_time as updateTime,`user`.remark as remark,IFNULL(dept_name,'') as deptName
+        FROM
+            sys_user `user`
+        LEFT JOIN sys_dept `dept` ON dept.dept_id = `user`.dept_id
+    </sql>
+
+    <sql id="selectList_where">
+        <where>
+            <if test="userId != null"> and user_id = #{userId}</if>
+            <if test="account != null"> and account = #{account}</if>
+            <if test="deptId != null"> and dept_id = #{deptId}</if>
+            <if test="nickName != null"> and nick_name = #{nickName}</if>
+            <if test="userType != null"> and user_type = #{userType}</if>
+            <if test="password != null"> and password = #{password}</if>
+            <if test="salt != null"> and salt = #{salt}</if>
+            <if test="email != null"> and email = #{email}</if>
+            <if test="avatar != null"> and avatar = #{avatar}</if>
+            <if test="phoneNumber != null"> and phone_number = #{phoneNumber}</if>
+            <if test="sex != null"> and sex = #{sex}</if>
+            <if test="status != null"> and status = #{status}</if>
+            <if test="reversion != null"> and reversion = #{reversion}</if>
+            <if test="createBy != null"> and create_by = #{createBy}</if>
+            <if test="updateBy != null"> and update_by = #{updateBy}</if>
+            <if test="createTimeGte != null and createTimeGte != ''"> and create_time &gt;= #{createTimeGte}</if>
+            <if test="createTimeLte != null and createTimeLte != ''"> and create_time &lt;= #{createTimeLte}</if>
+            <if test="updateTimeGte != null and updateTimeGte != ''"> and update_time &gt;= #{updateTimeGte}</if>
+            <if test="updateTimeLte != null and updateTimeLte != ''"> and update_time &lt;= #{updateTimeLte}</if>
+            <if test="remarkLike != null and remarkLike != ''"> and remark like '%${remarkLike}%'</if>
+            <if test="params.nickNameLike != null and params.nickNameLike != ''"> and nick_name like '%${params.nickNameLike}%'</if>
+        </where>
+    </sql>
+</mapper>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.linzx.admin.system.mapper.RoleMapper">
+
+    <select id="selectList" parameterType="com.linzx.admin.system.domain.Role"
+            resultType="com.linzx.admin.system.domain.Role">
+        <include refid="selectVo"/>
+        <include refid="selectList_where"/>
+		<if test="params.orderBy != null and params.orderBy != ''">
+            ORDER BY ${params.orderBy}
+        </if>
+    </select>
+
+    <select id="getById" parameterType="java.lang.Long" resultType="com.linzx.admin.system.domain.Role">
+        <include refid="selectVo"/>
+        where role_id = #{roleId}
+    </select>
+
+    <select id="selectByIds" parameterType="java.lang.Long" resultType="com.linzx.admin.system.domain.Role">
+        <include refid="selectVo"/>
+        where role_id in
+        <foreach item="roleId" collection="array" open="(" separator="," close=")">
+            #{roleId}
+        </foreach>
+    </select>
+
+    <insert id="insert" parameterType="com.linzx.admin.system.domain.Role">
+        insert into sys_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="roleId != null">role_id,</if>
+            <if test="roleCode != null">role_code,</if>
+            <if test="roleName != null">role_name,</if>
+            <if test="orderNum != null">order_num,</if>
+            <if test="dataScope != null">data_scope,</if>
+            <if test="status != null">status,</if>
+            <if test="reversion != null">reversion,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="roleId != null">#{roleId},</if>
+            <if test="roleCode != null">#{roleCode},</if>
+            <if test="roleName != null">#{roleName},</if>
+            <if test="orderNum != null">#{orderNum},</if>
+            <if test="dataScope != null">#{dataScope},</if>
+            <if test="status != null">#{status},</if>
+            <if test="reversion != null">#{reversion},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.linzx.admin.system.domain.Role">
+        update sys_role
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="roleId != null">role_id = #{roleId},</if>
+            <if test="roleCode != null">role_code = #{roleCode},</if>
+            <if test="roleName != null">role_code = #{roleName},</if>
+            <if test="orderNum != null">order_num = #{orderNum},</if>
+            <if test="dataScope != null">data_scope = #{dataScope},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="reversion != null">reversion = #{reversion},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where role_id = #{roleId}
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from sys_role where role_id = #{roleId}
+    </delete>
+
+    <delete id="deleteByIds" parameterType="java.lang.Long">
+        delete from sys_role where role_id in
+        <foreach item="roleId" collection="array" open="(" separator="," close=")">
+            #{roleId}
+        </foreach>
+    </delete>
+
+    <sql id="selectVo">
+        select role_id as roleId,role_code as roleCode,role_name as roleName,order_num as orderNum,data_scope as dataScope,status as status,reversion as reversion,create_by as createBy,create_time as createTime,update_by as updateBy,update_time as updateTime,remark as remark from sys_role
+    </sql>
+
+    <sql id="selectList_where">
+        <where>
+            <if test="roleId != null"> and role_id = #{roleId}</if>
+            <if test="roleCode != null"> and role_code = #{roleCode}</if>
+            <if test="roleName != null"> and role_code = #{roleName}</if>
+            <if test="orderNum != null"> and order_num = #{orderNum}</if>
+            <if test="dataScope != null"> and data_scope = #{dataScope}</if>
+            <if test="status != null"> and status = #{status}</if>
+            <if test="reversion != null"> and reversion = #{reversion}</if>
+            <if test="createBy != null"> and create_by = #{createBy}</if>
+            <if test="updateBy != null"> and update_by = #{updateBy}</if>
+            <if test="createTimeGte != null and createTimeGte != ''"> and create_time &gt;= #{createTimeGte}</if>
+            <if test="createTimeLte != null and createTimeLte != ''"> and create_time &lt;= #{createTimeLte}</if>
+            <if test="updateTimeGte != null and updateTimeGte != ''"> and update_time &gt;= #{updateTimeGte}</if>
+            <if test="updateTimeLte != null and updateTimeLte != ''"> and update_time &lt;= #{updateTimeLte}</if>
+            <if test="remarkLike != null and remarkLike != ''"> and remark like '%${remarkLike}%'</if>
+        </where>
+    </sql>
+</mapper>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.linzx.admin.system.mapper.MenuMapper">
+
+    <select id="selectList" parameterType="com.linzx.admin.system.domain.Menu"
+            resultType="com.linzx.admin.system.domain.Menu">
+        <include refid="selectVo"/>
+        <include refid="selectList_where"/>
+        <if test="params.orderBy != null and params.orderBy != ''">
+            ORDER BY ${params.orderBy}
+        </if>
+    </select>
+
+    <select id="getById" parameterType="java.lang.Long" resultType="com.linzx.admin.system.domain.Menu">
+        <include refid="selectVo"/>
+        where menu_id = #{menuId}
+    </select>
+
+    <select id="selectByIds" parameterType="java.lang.Long" resultType="com.linzx.admin.system.domain.Menu">
+        <include refid="selectVo"/>
+        where menu_id in
+        <foreach item="menuId" collection="array" open="(" separator="," close=")">
+            #{menuId}
+        </foreach>
+    </select>
+
+    <insert id="insert" parameterType="com.linzx.admin.system.domain.Menu">
+        insert into sys_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="menuId != null">menu_id,</if>
+            <if test="menuName != null">menu_name,</if>
+            <if test="parentId != null">parent_id,</if>
+            <if test="orderNum != null">order_num,</if>
+            <if test="path != null">path,</if>
+            <if test="ancestors != null">ancestors,</if>
+            <if test="menuType != null">menu_type,</if>
+            <if test="perms != null">perms,</if>
+            <if test="icon != null">icon,</if>
+            <if test="component != null">component,</if>
+            <if test="visible != null">visible,</if>
+            <if test="status != null">status,</if>
+            <if test="reversion != null">reversion,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="menuId != null">#{menuId},</if>
+            <if test="menuName != null">#{menuName},</if>
+            <if test="parentId != null">#{parentId},</if>
+            <if test="orderNum != null">#{orderNum},</if>
+            <if test="path != null">#{path},</if>
+            <if test="ancestors != null">#{ancestors},</if>
+            <if test="menuType != null">#{menuType},</if>
+            <if test="perms != null">#{perms},</if>
+            <if test="icon != null">#{icon},</if>
+            <if test="component != null">#{component},</if>
+            <if test="visible != null">#{visible},</if>
+            <if test="status != null">#{status},</if>
+            <if test="reversion != null">#{reversion},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.linzx.admin.system.domain.Menu">
+        update sys_menu
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="menuId != null">menu_id = #{menuId},</if>
+            <if test="menuName != null">menu_name = #{menuName},</if>
+            <if test="parentId != null">parent_id = #{parentId},</if>
+            <if test="orderNum != null">order_num = #{orderNum},</if>
+            <if test="path != null">path = #{path},</if>
+            <if test="ancestors != null">ancestors = #{ancestors},</if>
+            <if test="menuType != null">menu_type = #{menuType},</if>
+            <if test="perms != null">perms = #{perms},</if>
+            <if test="icon != null">icon = #{icon},</if>
+            <if test="component != null">component = #{component},</if>
+            <if test="visible != null">visible = #{visible},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="reversion != null">reversion = #{reversion},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where menu_id = #{menuId}
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from sys_menu where menu_id = #{menuId}
+    </delete>
+
+    <delete id="deleteByIds" parameterType="java.lang.Long">
+        delete from sys_menu where menu_id in
+        <foreach item="menuId" collection="array" open="(" separator="," close=")">
+            #{menuId}
+        </foreach>
+    </delete>
+
+    <sql id="selectVo">
+        select menu_id as menuId,menu_name as menuName,parent_id as parentId,order_num as orderNum,path as path,ancestors as ancestors,menu_type as menuType,perms as perms,icon as icon,component as component,visible as visible,status as status,reversion as reversion,create_by as createBy,create_time as createTime,update_by as updateBy,update_time as updateTime,remark as remark from sys_menu
+    </sql>
+
+    <sql id="selectList_where">
+        <where>
+            <if test="menuId != null"> and menu_id = #{menuId}</if>
+            <if test="menuName != null"> and menu_name = #{menuName}</if>
+            <if test="parentId != null"> and parent_id = #{parentId}</if>
+            <if test="orderNum != null"> and order_num = #{orderNum}</if>
+            <if test="path != null"> and order_num = #{path}</if>
+            <if test="ancestors != null"> and ancestors = #{ancestors}</if>
+            <if test="menuType != null"> and menu_type = #{menuType}</if>
+            <if test="perms != null"> and perms = #{perms}</if>
+            <if test="icon != null"> and icon = #{icon}</if>
+            <if test="component != null"> and component = #{component}</if>
+            <if test="visible != null"> and visible = #{visible}</if>
+            <if test="status != null"> and status = #{status}</if>
+            <if test="reversion != null"> and reversion = #{reversion}</if>
+            <if test="createBy != null"> and create_by = #{createBy}</if>
+            <if test="updateBy != null"> and update_by = #{updateBy}</if>
+            <if test="createTimeGte != null and createTimeGte != ''"> and create_time &gt;= #{createTimeGte}</if>
+            <if test="createTimeLte != null and createTimeLte != ''"> and create_time &lt;= #{createTimeLte}</if>
+            <if test="updateTimeGte != null and updateTimeGte != ''"> and update_time &gt;= #{updateTimeGte}</if>
+            <if test="updateTimeLte != null and updateTimeLte != ''"> and update_time &lt;= #{updateTimeLte}</if>
+            <if test="remarkLike != null and remarkLike != ''"> and remark like '%${remarkLike}%'</if>
+            <if test="params.menuTypes != null">
+                <foreach item="menuType" collection="params.menuTypes" open=" and menu_type in (" separator="," close=")">
+                    #{menuType}
+                </foreach>
+            </if>
+            <if test="params.menuNameLike != null and params.menuNameLike != ''"> and menu_name like '%${params.menuNameLike}%'</if>
+        </where>
+    </sql>
+</mapper>
