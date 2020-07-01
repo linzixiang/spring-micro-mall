@@ -287,7 +287,7 @@
             <dependency>
                 <groupId>org.hibernate.validator</groupId>
                 <artifactId>hibernate-validator</artifactId>
-                <version>6.0.16.Final</version>
+                <version>6.1.0.Final</version>
             </dependency>
             <!-- 参数校验 结束 -->
             <!-- 阿里云OSS 开始-->
