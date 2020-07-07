@@ -106,6 +106,12 @@
         </foreach>
     </delete>
 
+    <select id="isExist" parameterType="com.linzx.admin.system.domain.Menu" resultType="java.lang.Integer">
+        select 1 from sys_menu
+        <include refid="selectList_where"/>
+        limit 1
+     </select>
+
     <sql id="selectVo">
         select menu_id as menuId,menu_name as menuName,parent_id as parentId,order_num as orderNum,path as path,ancestors as ancestors,menu_type as menuType,perms as perms,icon as icon,component as component,visible as visible,status as status,reversion as reversion,create_by as createBy,create_time as createTime,update_by as updateBy,update_time as updateTime,remark as remark from sys_menu
     </sql>

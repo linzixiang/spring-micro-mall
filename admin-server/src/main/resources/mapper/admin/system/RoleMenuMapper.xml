@@ -77,6 +77,12 @@
         </foreach>
     </delete>
 
+    <select id="isExist" parameterType="com.linzx.admin.system.domain.RoleMenu" resultType="java.lang.Integer">
+        select 1 from sys_role_menu
+        <include refid="selectList_where"/>
+        limit 1
+    </select>
+
     <sql id="selectVo">
         select role_menu_id as roleMenuId,role_id as roleId,menu_id as menuId from sys_role_menu
     </sql>

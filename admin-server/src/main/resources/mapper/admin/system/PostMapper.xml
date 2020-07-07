@@ -85,6 +85,12 @@
         </foreach>
     </delete>
 
+    <select id="isExist" parameterType="com.linzx.admin.system.domain.Post" resultType="java.lang.Integer">
+        select 1 from sys_post
+        <include refid="selectList_where"/>
+        limit 1
+    </select>
+
     <sql id="selectVo">
         select post_id as postId,post_code as postCode,post_name as postName,order_num as orderNum,status as status,reversion as reversion,create_by as createBy,create_time as createTime,update_by as updateBy,update_time as updateTime,remark as remark from sys_post
     </sql>

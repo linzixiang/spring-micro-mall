@@ -77,6 +77,12 @@
         </foreach>
     </delete>
 
+    <select id="isExist" parameterType="com.linzx.admin.system.domain.UserPost" resultType="java.lang.Integer">
+        select 1 from sys_user_post
+        <include refid="selectList_where"/>
+        limit 1
+    </select>
+
     <sql id="selectVo">
         select user_post_id as userPostId,user_id as userId,post_id as postId from sys_user_post
     </sql>

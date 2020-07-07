@@ -77,6 +77,12 @@
         </foreach>
     </delete>
 
+    <select id="isExist" parameterType="com.linzx.admin.system.domain.UserRole" resultType="java.lang.Integer">
+        select 1 from sys_user_role
+        <include refid="selectList_where"/>
+        limit 1
+    </select>
+
     <sql id="selectVo">
         select use_role_id as useRoleId,user_id as userId,role_id as roleId from sys_user_role
     </sql>

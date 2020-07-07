@@ -88,6 +88,12 @@
         </foreach>
     </delete>
 
+    <select id="isExist" parameterType="com.linzx.admin.system.domain.Role" resultType="java.lang.Integer">
+        select 1 from sys_role
+        <include refid="selectList_where"/>
+        limit 1
+    </select>
+
     <sql id="selectVo">
         select role_id as roleId,role_code as roleCode,role_name as roleName,order_num as orderNum,data_scope as dataScope,status as status,reversion as reversion,create_by as createBy,create_time as createTime,update_by as updateBy,update_time as updateTime,remark as remark from sys_role
     </sql>

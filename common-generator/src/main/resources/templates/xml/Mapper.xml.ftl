@@ -76,6 +76,12 @@
             <#noparse>#</#noparse>{${primaryKey.attrname}}
         </foreach>
     </delete>
+	
+	<select id="isExist" parameterType="${basePackageName}.${projectName}.${moduleName}.domain.${className}" resultType="java.lang.Integer">
+        select 1 from ${tableName}
+        <include refid="selectList_where"/>
+        limit 1
+    </select>
 
     <sql id="selectVo">
         select <#list columns as columnInfo><#if columnInfo_has_next>${columnInfo.columnName} as ${columnInfo.attrname},<#else>${columnInfo.columnName} as ${columnInfo.attrname}</#if></#list> from ${tableName}

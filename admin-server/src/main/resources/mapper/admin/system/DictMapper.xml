@@ -79,6 +79,12 @@
         </foreach>
     </delete>
 
+    <select id="isExist" parameterType="com.linzx.admin.system.domain.Dict" resultType="java.lang.Integer">
+        select 1 from sys_dict
+        <include refid="selectList_where"/>
+        limit 1
+    </select>
+
     <sql id="selectVo">
         select dict_id as dictId,dict_name as dictName,dict_code as dictCode,status as status,reversion as reversion,create_by as createBy,create_time as createTime,update_by as updateBy,update_time as updateTime,remark as remark from sys_dict
     </sql>

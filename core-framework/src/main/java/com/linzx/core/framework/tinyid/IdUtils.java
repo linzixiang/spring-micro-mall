@@ -32,7 +32,7 @@ public class IdUtils implements InitializingBean, ApplicationContextAware {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        idGeneratorFactory = (IdGeneratorFactory) applicationContext.getBean("");
+        idGeneratorFactory = (IdGeneratorFactory) applicationContext.getBean("idGeneratorFactory");
     }
 
     @Override

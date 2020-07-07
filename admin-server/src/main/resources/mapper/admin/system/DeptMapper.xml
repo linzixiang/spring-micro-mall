@@ -97,6 +97,12 @@
         </foreach>
     </delete>
 
+    <select id="isExist" parameterType="com.linzx.admin.system.domain.Dept" resultType="java.lang.Integer">
+        select 1 from sys_dept
+        <include refid="selectList_where"/>
+        limit 1
+    </select>
+
     <sql id="selectVo">
         select dept_id as deptId,parent_id as parentId,ancestors as ancestors,dept_name as deptName,order_num as orderNum,leader as leader,phone as phone,email as email,status as status,reversion as reversion,create_by as createBy,create_time as createTime,update_by as updateBy,update_time as updateTime,remark as remark from sys_dept
     </sql>

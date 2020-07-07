@@ -111,6 +111,17 @@ public abstract class BaseService<PK,E extends BaseEntity<PK>, DAO extends BaseM
         return baseDAO.deleteByIds(ids);
     }
 
+    /**
+     * 判断是否存在
+     */
+    public Boolean isExist(E entity) {
+        Integer exist = baseDAO.isExist(entity);
+        if (exist == null ||  exist <= 0 ) {
+            return false;
+        }
+        return true;
+    }
+
     @Override
     public void afterPropertiesSet() throws Exception {
         this.baseDAO = this.getMapper();

@@ -122,6 +122,12 @@
         </foreach>
     </delete>
 
+    <select id="isExist" parameterType="com.linzx.admin.system.domain.Config" resultType="java.lang.Integer">
+        select 1 from sys_config
+        <include refid="selectList_where"/>
+        limit 1
+    </select>
+
     <sql id="selectVo">
         select config_id as configId,config_name as configName,config_key as configKey,config_value as configValue,config_type as configType,status as status,reversion as reversion,create_by as createBy,create_time as createTime,update_by as updateBy,update_time as updateTime,remark as remark from sys_config
     </sql>

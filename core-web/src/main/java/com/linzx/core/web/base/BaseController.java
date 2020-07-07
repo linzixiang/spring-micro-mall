@@ -1,9 +1,11 @@
 package com.linzx.core.web.base;
 
 import cn.hutool.core.annotation.AnnotationUtil;
+import cn.hutool.core.annotation.CombinationAnnotationElement;
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.io.IoUtil;
+import cn.hutool.core.lang.Filter;
 import cn.hutool.core.map.MapProxy;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ReflectUtil;
@@ -23,7 +25,10 @@ import com.linzx.core.framework.context.ContextManager;
 import com.linzx.core.framework.support.xml.bean.DictBean;
 import com.linzx.core.web.base.vo.DictOption;
 import javafx.util.Pair;
+import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -35,12 +40,13 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.*;
 
 /**
  * 控制层基类
  */
-public abstract class BaseController {
+public abstract class BaseController implements InitializingBean {
 
     public static final String PAGE_NUM = "pageNum"; // 第几页
     public static final String PAGE_SIZE = "pageSize"; // 每页大小
@@ -171,4 +177,30 @@ public abstract class BaseController {
         outputStream.flush();
     }
 
+    @Override
+    public void afterPropertiesSet() throws Exception {
+        List<Method> methodList = ReflectUtil.getPublicMethods(this.getClass(), new Filter<Method>() {
+
+            @Override
+            public boolean accept(Method method) {
+                return AnnotationUtil.getAnnotation(method, RequestMapping.class) != null;
+            }
+        });
+        Controller annotation = AnnotationUtil.toCombination(this.getClass()).getAnnotation(Controller.class);
+        for (Method method : methodList) {
+            // 组合注解
+            CombinationAnnotationElement combinationAnnotationElement = AnnotationUtil.toCombination(method);
+            RequestMapping requestMapping = combinationAnnotationElement.getAnnotation(RequestMapping.class);
+            GetMapping getMapping = combinationAnnotationElement.getAnnotation(GetMapping.class);
+            PostMapping postMapping = combinationAnnotationElement.getAnnotation(PostMapping.class);
+            DeleteMapping deleteMapping = combinationAnnotationElement.getAnnotation(DeleteMapping.class);
+            PutMapping putMapping = combinationAnnotationElement.getAnnotation(PutMapping.class);
+            if (requestMapping != null) {
+
+            } else if (getMapping != null) {
+
+            }
+            AnnotationUtil.getAnnotations(method, true);
+        }
+    }
 }

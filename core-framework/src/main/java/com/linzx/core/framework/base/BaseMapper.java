@@ -65,4 +65,9 @@ public interface BaseMapper<PK, E extends BaseEntity<PK>>  {
      */
     Integer deleteByIds(PK[] entityIds);
 
+    /**
+     * 判断是否存在
+     */
+    Integer isExist(E entity);
+
 }
