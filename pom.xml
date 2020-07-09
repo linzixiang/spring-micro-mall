@@ -43,6 +43,7 @@
         <fileupload.version>1.3.1</fileupload.version>
         <poi.version>4.1.2</poi.version>
         <xerces.version>2.12.0</xerces.version>
+        <quartz.version>2.2.3</quartz.version>
     </properties>
 
     <dependencyManagement>
@@ -302,6 +303,18 @@
                 <version>${fileupload.version}</version>
             </dependency>
             <!-- 阿里云OSS 结束-->
+            <!--spring quartz依赖 开始-->
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz</artifactId>
+                <version>${quartz.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.quartz-scheduler</groupId>
+                <artifactId>quartz-jobs</artifactId>
+                <version>${quartz.version}</version>
+            </dependency>
+            <!--spring quartz依赖 结束-->
         </dependencies>
     </dependencyManagement>
 

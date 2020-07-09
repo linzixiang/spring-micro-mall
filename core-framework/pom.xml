@@ -76,5 +76,15 @@
             <artifactId>mapstruct-processor</artifactId>
         </dependency>
         <!--mapstruct映射 结束-->
+        <!--spring quartz依赖 开始-->
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.quartz-scheduler</groupId>
+            <artifactId>quartz-jobs</artifactId>
+        </dependency>
+        <!--spring quartz依赖 结束-->
     </dependencies>
 </project>
