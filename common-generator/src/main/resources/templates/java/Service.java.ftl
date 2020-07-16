@@ -1,5 +1,10 @@
 package ${basePackageName}.${projectName}.${moduleName}.service;
 
+import ${basePackageName}.${projectName}.${moduleName}.domain.${className};
+
+import java.util.List;
+import java.util.Optional;
+
 /**
  * ${tableComment} 服务层接口
  * @author ${author}

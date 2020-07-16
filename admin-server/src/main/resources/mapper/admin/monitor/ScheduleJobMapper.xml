@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.linzx.admin.monitor.mapper.ScheduleJobMapper">
+
+    <select id="selectList" parameterType="com.linzx.admin.monitor.domain.ScheduleJob"
+            resultType="com.linzx.admin.monitor.domain.ScheduleJob">
+        <include refid="selectVo"/>
+        <include refid="selectList_where"/>
+		<if test="params.orderBy != null and params.orderBy != ''">
+            ORDER BY ${params.orderBy}
+        </if>
+    </select>
+
+    <select id="getById" parameterType="java.lang.Long" resultType="com.linzx.admin.monitor.domain.ScheduleJob">
+        <include refid="selectVo"/>
+        where job_id = #{jobId}
+    </select>
+
+    <select id="selectByIds" parameterType="java.lang.Long" resultType="com.linzx.admin.monitor.domain.ScheduleJob">
+        <include refid="selectVo"/>
+        where job_id in
+        <foreach item="jobId" collection="array" open="(" separator="," close=")">
+            #{jobId}
+        </foreach>
+    </select>
+
+    <insert id="insert" parameterType="com.linzx.admin.monitor.domain.ScheduleJob">
+        insert into sys_schedule_job
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="jobId != null">job_id,</if>
+            <if test="jobName != null">job_name,</if>
+            <if test="jobGroup != null">job_group,</if>
+            <if test="cron != null">cron,</if>
+            <if test="classPath != null">class_path,</if>
+            <if test="paramJson != null">param_json,</if>
+            <if test="status != null">status,</if>
+            <if test="reversion != null">reversion,</if>
+            <if test="createBy != null">create_by,</if>
+            <if test="createTime != null">create_time,</if>
+            <if test="updateBy != null">update_by,</if>
+            <if test="updateTime != null">update_time,</if>
+            <if test="remark != null">remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="jobId != null">#{jobId},</if>
+            <if test="jobName != null">#{jobName},</if>
+            <if test="jobGroup != null">#{jobGroup},</if>
+            <if test="cron != null">#{cron},</if>
+            <if test="classPath != null">#{classPath},</if>
+            <if test="paramJson != null">#{paramJson},</if>
+            <if test="status != null">#{status},</if>
+            <if test="reversion != null">#{reversion},</if>
+            <if test="createBy != null">#{createBy},</if>
+            <if test="createTime != null">#{createTime},</if>
+            <if test="updateBy != null">#{updateBy},</if>
+            <if test="updateTime != null">#{updateTime},</if>
+            <if test="remark != null">#{remark},</if>
+        </trim>
+    </insert>
+	
+	<insert id="insertBatch" parameterType="com.linzx.admin.monitor.domain.ScheduleJob">
+        insert into sys_schedule_job
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="list[0].jobId != null">job_id,</if>
+            <if test="list[0].jobName != null">job_name,</if>
+            <if test="list[0].jobGroup != null">job_group,</if>
+            <if test="list[0].cron != null">cron,</if>
+            <if test="list[0].classPath != null">class_path,</if>
+            <if test="list[0].paramJson != null">param_json,</if>
+            <if test="list[0].status != null">status,</if>
+            <if test="list[0].reversion != null">reversion,</if>
+            <if test="list[0].createBy != null">create_by,</if>
+            <if test="list[0].createTime != null">create_time,</if>
+            <if test="list[0].updateBy != null">update_by,</if>
+            <if test="list[0].updateTime != null">update_time,</if>
+            <if test="list[0].remark != null">remark,</if>
+        </trim>
+		<foreach item="scheduleJob" collection="list" open="values" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="list[0].jobId != null">#{scheduleJob.jobId},</if>
+            <if test="list[0].jobName != null">#{scheduleJob.jobName},</if>
+            <if test="list[0].jobGroup != null">#{scheduleJob.jobGroup},</if>
+            <if test="list[0].cron != null">#{scheduleJob.cron},</if>
+            <if test="list[0].classPath != null">#{scheduleJob.classPath},</if>
+            <if test="list[0].paramJson != null">#{scheduleJob.paramJson},</if>
+            <if test="list[0].status != null">#{scheduleJob.status},</if>
+            <if test="list[0].reversion != null">#{scheduleJob.reversion},</if>
+            <if test="list[0].createBy != null">#{scheduleJob.createBy},</if>
+            <if test="list[0].createTime != null">#{scheduleJob.createTime},</if>
+            <if test="list[0].updateBy != null">#{scheduleJob.updateBy},</if>
+            <if test="list[0].updateTime != null">#{scheduleJob.updateTime},</if>
+            <if test="list[0].remark != null">#{scheduleJob.remark},</if>
+            </trim>
+        </foreach>
+    </insert>
+
+    <update id="update" parameterType="com.linzx.admin.monitor.domain.ScheduleJob">
+        update sys_schedule_job
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="jobId != null">job_id = #{jobId},</if>
+            <if test="jobName != null">job_name = #{jobName},</if>
+            <if test="jobGroup != null">job_group = #{jobGroup},</if>
+            <if test="cron != null">cron = #{cron},</if>
+            <if test="classPath != null">class_path = #{classPath},</if>
+            <if test="paramJson != null">param_json = #{paramJson},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="reversion != null">reversion = #{reversion},</if>
+            <if test="createBy != null">create_by = #{createBy},</if>
+            <if test="createTime != null">create_time = #{createTime},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="updateTime != null">update_time = #{updateTime},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </trim>
+        where job_id = #{jobId}
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete from sys_schedule_job where job_id = #{jobId}
+    </delete>
+
+    <delete id="deleteByIds" parameterType="java.lang.Long">
+        delete from sys_schedule_job where job_id in
+        <foreach item="jobId" collection="array" open="(" separator="," close=")">
+            #{jobId}
+        </foreach>
+    </delete>
+	
+	<select id="isExist" parameterType="com.linzx.admin.monitor.domain.ScheduleJob" resultType="java.lang.Integer">
+        select 1 from sys_schedule_job
+        <include refid="selectList_where"/>
+        limit 1
+    </select>
+
+    <sql id="selectVo">
+        select job_id as jobId,job_name as jobName,job_group as jobGroup,cron as cron,class_path as classPath,param_json as paramJson,status as status,reversion as reversion,create_by as createBy,create_time as createTime,update_by as updateBy,update_time as updateTime,remark as remark from sys_schedule_job
+    </sql>
+
+    <sql id="selectList_where">
+        <where>
+            <if test="jobId != null"> and job_id = #{jobId}</if>
+            <if test="jobName != null"> and job_name = #{jobName}</if>
+            <if test="jobGroup != null"> and job_group = #{jobGroup}</if>
+            <if test="cron != null"> and cron = #{cron}</if>
+            <if test="classPath != null"> and class_path = #{classPath}</if>
+            <if test="paramJson != null"> and param_json = #{paramJson}</if>
+            <if test="status != null"> and status = #{status}</if>
+            <if test="reversion != null"> and reversion = #{reversion}</if>
+            <if test="createBy != null"> and create_by = #{createBy}</if>
+            <if test="updateBy != null"> and update_by = #{updateBy}</if>
+            <if test="createTimeGte != null and createTimeGte != ''"> and create_time &gt;= #{createTimeGte}</if>
+            <if test="createTimeLte != null and createTimeLte != ''"> and create_time &lt;= #{createTimeLte}</if>
+            <if test="updateTimeGte != null and updateTimeGte != ''"> and update_time &gt;= #{updateTimeGte}</if>
+            <if test="updateTimeLte != null and updateTimeLte != ''"> and update_time &lt;= #{updateTimeLte}</if>
+            <if test="remarkLike != null and remarkLike != ''"> and remark like '%${remarkLike}%'</if>
+            <if test="params.excludeJobId != null"> and job_id != #{jobId} </if>
+        </where>
+    </sql>
+</mapper>

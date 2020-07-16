@@ -6,6 +6,7 @@ import com.alibaba.csp.sentinel.slots.block.RuleConstant;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRule;
 import com.alibaba.csp.sentinel.slots.block.flow.FlowRuleManager;
 import com.linzx.core.common.constant.WebSessionConstant;
+import com.linzx.core.framework.support.quartz.EnableQuartz;
 import com.linzx.core.web.support.resolver.CodeXmlResolverRunner;
 import com.linzx.core.web.support.resolver.DictXmlResolverRunner;
 import org.springframework.boot.SpringApplication;
@@ -22,6 +23,7 @@ import java.util.List;
 @EnableRedisHttpSession(maxInactiveIntervalInSeconds = WebSessionConstant.MAX_INACTIVE_INTERVAL_IN_SECONDS)
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 @Import({SpringUtil.class, CodeXmlResolverRunner.class, DictXmlResolverRunner.class})
+@EnableQuartz
 public class WebAdminApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {

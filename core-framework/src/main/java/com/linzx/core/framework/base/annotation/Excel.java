@@ -11,11 +11,11 @@ public @interface Excel {
     /**
      * 导出的文件名称
      */
-    String fileName();
+    String fileName() default "";
 
     /**
      * 表名称，不指定默认就是文件名称
      */
-    String sheetName();
+    String sheetName() default "";
 
 }

@@ -4,7 +4,12 @@ import com.linzx.admin.system.domain.Config;
 import com.linzx.admin.system.mapper.ConfigMapper;
 import com.linzx.admin.system.service.IConfigService;
 import com.linzx.core.framework.base.BaseService;
+import com.linzx.core.framework.support.quartz.core.Job;
+import com.linzx.core.framework.support.quartz.core.QuartzJobInit;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 参数配置 服务层实现

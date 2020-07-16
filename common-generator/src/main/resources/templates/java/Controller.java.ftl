@@ -1,5 +1,6 @@
 package ${basePackageName}.${projectName}.${moduleName}.controller;
 
+import cn.hutool.core.bean.BeanUtil;
 import com.github.pagehelper.Page;
 import ${basePackageName}.${projectName}.${moduleName}.convert.${className}Convert;
 import ${basePackageName}.${projectName}.${moduleName}.domain.${className};
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * ${tableComment}
@@ -121,7 +123,7 @@ public class ${className}Controller extends BaseController {
      */
 	@RequiresPermissions("${moduleName}:${classname}:export")
 	@RequestMapping("/export")
-    public void export(${className}ListReq ${classname}ListReq) throws IOException {
+    public void export(${className}ListReq ${classname}ListReq) throws Exception {
         // 数据集准备
         List<${className}> ${classname}List = select${className}List(${classname}ListReq);
         List<Map<String, Object>> dataList = new ArrayList<>();

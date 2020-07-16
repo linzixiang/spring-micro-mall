@@ -4,6 +4,7 @@ import cn.hutool.core.convert.Convert;
 import com.linzx.admin.system.domain.*;
 import com.linzx.admin.system.service.impl.*;
 import com.linzx.common.util.PasswordUtils;
+import com.linzx.core.framework.tinyid.IdUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,8 @@ public class AppDataInit {
         menuSystem.setMenuType(Menu.MENU_TYPE_M);
         menuSystem.setVisible(Menu.VISIBLE_SHOW);
         menuSystem.setRemark("系统管理目录");
-        menuSystem.setId(menuService.getNextId(menuSystem));
+
+        menuSystem.setId(IdUtils.getDBSequenceNextId(menuSystem));
         menuSystem.setAncestors(menuSystem.getId().toString());
         menuService.insert(menuSystem);
         Menu menuMonitor = new Menu();
@@ -68,7 +70,7 @@ public class AppDataInit {
         menuMonitor.setMenuType(Menu.MENU_TYPE_M);
         menuMonitor.setVisible(Menu.VISIBLE_SHOW);
         menuMonitor.setRemark("系统监控目录");
-        menuMonitor.setId(menuService.getNextId(menuSystem));
+        menuMonitor.setId(IdUtils.getDBSequenceNextId(menuSystem));
         menuMonitor.setAncestors(menuMonitor.getId().toString());
         menuService.insert(menuMonitor);
         Menu menuTool = new Menu();
@@ -79,7 +81,7 @@ public class AppDataInit {
         menuTool.setMenuType(Menu.MENU_TYPE_M);
         menuTool.setVisible(Menu.VISIBLE_SHOW);
         menuTool.setRemark("系统工具目录");
-        menuTool.setId(menuService.getNextId(menuTool));
+        menuTool.setId(IdUtils.getDBSequenceNextId(menuTool));
         menuTool.setAncestors(menuTool.getId().toString());
         menuService.insert(menuTool);
 
@@ -94,7 +96,7 @@ public class AppDataInit {
         menuUser.setRemark("用户管理菜单");
         menuUser.setComponent("system/user/index");
         menuUser.setPerms("system:user:list");
-        menuUser.setId(menuService.getNextId(menuUser));
+        menuUser.setId(IdUtils.getDBSequenceNextId(menuUser));
         menuUser.setAncestors(menuUser.getParentId() + "," + menuUser.getId().toString());
         menuService.insert(menuUser);
         Menu menuRole = new Menu();
@@ -107,7 +109,7 @@ public class AppDataInit {
         menuRole.setRemark("角色管理菜单");
         menuRole.setComponent("system/role/index");
         menuRole.setPerms("system:role:list");
-        menuRole.setId(menuService.getNextId(menuRole));
+        menuRole.setId(IdUtils.getDBSequenceNextId(menuRole));
         menuRole.setAncestors(menuRole.getParentId() + "," + menuRole.getId());
         menuService.insert(menuRole);
         Menu menuMenu = new Menu();
@@ -120,7 +122,7 @@ public class AppDataInit {
         menuMenu.setRemark("菜单管理菜单");
         menuMenu.setComponent("system/menu/index");
         menuMenu.setPerms("system:menu:list");
-        menuMenu.setId(menuService.getNextId(menuMenu));
+        menuMenu.setId(IdUtils.getDBSequenceNextId(menuMenu));
         menuMenu.setAncestors(menuMenu.getParentId() + "," + menuMenu.getId());
         menuService.insert(menuMenu);
      }
@@ -134,7 +136,7 @@ public class AppDataInit {
         Dict sex = new Dict();
         sex.setDictCode("gender");
         sex.setDictName("性别");
-        sex.setDictId(dictService.getNextId(sex));
+        sex.setDictId(IdUtils.getDBSequenceNextId(sex));
         dictService.insert(sex);
         DictOption sexOption1 = new DictOption();
         sexOption1.setDictCode(sex.getDictCode());
@@ -161,7 +163,7 @@ public class AppDataInit {
         Dict yesNo = new Dict();
         yesNo.setDictCode("yes_no");
         yesNo.setDictName("是否");
-        yesNo.setDictId(dictService.getNextId(yesNo));
+        yesNo.setDictId(IdUtils.getDBSequenceNextId(yesNo));
         dictService.insert(yesNo);
         DictOption yesNoOption1 = new DictOption();
         yesNoOption1.setDictCode(yesNo.getDictCode());
@@ -181,7 +183,7 @@ public class AppDataInit {
         Dict showHidden = new Dict();
         showHidden.setDictCode("show_hide");
         showHidden.setDictName("显示隐藏");
-        showHidden.setDictId(dictService.getNextId(showHidden));
+        showHidden.setDictId(IdUtils.getDBSequenceNextId(showHidden));
         dictService.insert(showHidden);
         DictOption showHiddenOption1 = new DictOption();
         showHiddenOption1.setDictCode(showHidden.getDictCode());
@@ -201,7 +203,7 @@ public class AppDataInit {
         Dict normalDisable = new Dict();
         normalDisable.setDictCode("normal_disable");
         normalDisable.setDictName("正常停用");
-        normalDisable.setDictId(dictService.getNextId(normalDisable));
+        normalDisable.setDictId(IdUtils.getDBSequenceNextId(normalDisable));
         dictService.insert(normalDisable);
         DictOption normalDisableOption1 = new DictOption();
         normalDisableOption1.setDictCode(normalDisable.getDictCode());
@@ -231,35 +233,35 @@ public class AppDataInit {
         rootDept.setParentId(0L);
         rootDept.setDeptName("若依科技");
         rootDept.setOrderNum(0);
-        rootDept.setId(deptService.getNextId(rootDept));
+        rootDept.setId(IdUtils.getDBSequenceNextId(rootDept));
         rootDept.setAncestors(Convert.toStr(rootDept.getId()));
         deptService.insert(rootDept);
         Dept shenzhenDept = new Dept();
         shenzhenDept.setParentId(rootDept.getId());
         shenzhenDept.setDeptName("深圳总公司");
         shenzhenDept.setOrderNum(100);
-        shenzhenDept.setId(deptService.getNextId(shenzhenDept));
+        shenzhenDept.setId(IdUtils.getDBSequenceNextId(shenzhenDept));
         shenzhenDept.setAncestors(rootDept.getAncestors() + "," + shenzhenDept.getId());
         deptService.insert(shenzhenDept);
         Dept changshaDept = new Dept();
         changshaDept.setParentId(rootDept.getId());
         changshaDept.setDeptName("长沙分公司");
         changshaDept.setOrderNum(90);
-        changshaDept.setId(deptService.getNextId(changshaDept));
+        changshaDept.setId(IdUtils.getDBSequenceNextId(changshaDept));
         changshaDept.setAncestors(rootDept.getAncestors() + "," + changshaDept.getId());
         deptService.insert(changshaDept);
         Dept developDept = new Dept();
         developDept.setParentId(changshaDept.getId());
         developDept.setDeptName("研发部门");
         developDept.setOrderNum(100);
-        developDept.setId(deptService.getNextId(developDept));
+        developDept.setId(IdUtils.getDBSequenceNextId(developDept));
         developDept.setAncestors(changshaDept.getAncestors() + "," + developDept.getId());
         deptService.insert(developDept);
         Dept marketDept = new Dept();
         marketDept.setParentId(changshaDept.getId());
         marketDept.setDeptName("市场部门");
         marketDept.setOrderNum(90);
-        marketDept.setId(deptService.getNextId(marketDept));
+        marketDept.setId(IdUtils.getDBSequenceNextId(marketDept));
         marketDept.setAncestors(changshaDept.getAncestors() + "," + marketDept.getId());
         deptService.insert(marketDept);
      }

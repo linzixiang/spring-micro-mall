@@ -1,6 +1,5 @@
 package com.linzx.admin.system.dto.user.response;
 
-import cn.hutool.core.date.DatePattern;
 import com.linzx.core.framework.base.annotation.Excel;
 import com.linzx.core.framework.base.annotation.ExcelColumn;
 import lombok.Getter;

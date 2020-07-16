@@ -11,7 +11,7 @@ public class GenCodeMain {
 
     public static final String path = "C:\\Users\\Administrator.SC-201903222216\\Desktop";
 
-    public static final String tableName = "sys_config";
+    public static final String tableName = "sys_schedule_job";
 
 //    public static final String path = "C:\\Users\\LZX\\Desktop";
 

@@ -1,6 +1,5 @@
 package com.linzx.core.framework.support.quartz.core;
 
-import com.linzx.core.framework.support.quartz.core.AdaptableJobFactory;
 import org.quartz.spi.TriggerFiredBundle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
