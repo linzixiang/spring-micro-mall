@@ -31,7 +31,7 @@
         <mybatis.pagehelper.version>5.1.11</mybatis.pagehelper.version>
         <fastjson.version>1.2.56</fastjson.version>
         <smart.doc.version>1.8.4</smart.doc.version>
-        <dubbo.version>2.7.3</dubbo.version>
+        <dubbo.version>2.7.13</dubbo.version>
         <curator.version>4.0.1</curator.version>
         <dubbo.starter.version>2.7.1</dubbo.starter.version>
         <sentinel.version>1.7.2</sentinel.version>
