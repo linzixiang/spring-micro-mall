@@ -25,7 +25,7 @@
     <properties>
         <spring.boot.version>2.1.4.RELEASE</spring.boot.version>
         <druid.version>1.1.10</druid.version>
-        <hutool.version>5.3.0</hutool.version>
+        <hutool.version>5.7.19</hutool.version>
         <lombok.version>1.18.4</lombok.version>
         <mybatis.boot.version>1.3.2</mybatis.boot.version>
         <mybatis.pagehelper.version>5.1.11</mybatis.pagehelper.version>
