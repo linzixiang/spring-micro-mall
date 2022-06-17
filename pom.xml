@@ -29,7 +29,7 @@
         <lombok.version>1.18.4</lombok.version>
         <mybatis.boot.version>1.3.2</mybatis.boot.version>
         <mybatis.pagehelper.version>5.1.11</mybatis.pagehelper.version>
-        <fastjson.version>1.2.56</fastjson.version>
+        <fastjson.version>1.2.83</fastjson.version>
         <smart.doc.version>1.8.4</smart.doc.version>
         <dubbo.version>2.7.3</dubbo.version>
         <curator.version>4.0.1</curator.version>
